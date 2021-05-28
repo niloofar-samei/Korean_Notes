@@ -2,6 +2,10 @@
 <html>
   <head></head>
   <body>
-    {{ note }}
+    <h1>{{ note.note_title }}</h1>
+    <p>{{ note.note_text }}</p>
+    <i>{{ note.author }}</i><br>
+    <i>{{ note.pub_date }}</i><br>
+    <a href="/notes/">back</a>
   </body>
 </html>
