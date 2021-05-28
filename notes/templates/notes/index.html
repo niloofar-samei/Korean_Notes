@@ -1,0 +1,15 @@
+</!DOCTYPE html>
+<html>
+  <head></head>
+  <body>
+    {% if latest_quick_notes %}
+      <ul>
+        {% for note in latest_quick_notes %}
+          <li><a href="/note/{{ id }}/">{{ note.note_title }}</a></li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No notes are available.</a>
+    {% endif %}
+  </body>
+</html>
