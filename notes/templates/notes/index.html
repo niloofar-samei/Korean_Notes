@@ -5,7 +5,7 @@
     {% if latest_quick_notes %}
       <ul>
         {% for note in latest_quick_notes %}
-          <li><a href="/note/{{ id }}/">{{ note.note_title }}</a></li>
+          <li><a href="/notes/{{ note.id }}/">{{ note.note_title }}</a></li>
         {% endfor %}
       </ul>
     {% else %}
