@@ -4,5 +4,7 @@ from . import views
 app_name = 'notes'
 urlpatterns = [
     path('', views.index, name='index'),
+    path('<int:id>/comments/', views.comments, name='comments'),
+    path('<int:id>/<str:message>/', views.note, name='note'),
     path('<int:id>/', views.note, name='note'),
 ]

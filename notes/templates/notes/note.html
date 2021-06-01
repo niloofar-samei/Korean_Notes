@@ -7,5 +7,20 @@
     <i>{{ note.author }}</i><br>
     <i>{{ note.pub_date }}</i><br>
     <a href="/notes/">back</a>
+
+    {% if message == "successful" %}
+      <p><strong> I'll receive your comment. Thank you! </strong></p>
+    {% elif message == "unsuccessful" %}
+      <p><strong> That's empty! </strong></p>
+    {% else %}
+      <p><strong>{{ message }}</strong></p>
+    {% endif %}
+
+    <form action="{% url 'notes:comments' note.id %}" method="post">
+      {% csrf_token %}
+      <textarea name="comments" id="comments{{ note.id }}" rows="4" cols="50"></textarea>
+      <input type="submit" value="Send">
+    </form>
+
   </body>
 </html>
