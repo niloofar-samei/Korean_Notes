@@ -17,7 +17,7 @@ def comments(request, id):
     note = get_object_or_404(Notes, pk=id)
     try:
         if request.POST['comments'] != '':
-            comment = Comments(comment_text=request.POST['comments'], note_id=id)
+            comment = Comments(text=request.POST['comments'], note_id=id)
             comment.save()
             return HttpResponseRedirect(reverse('notes:note', args=(id, "successful")))
         else:

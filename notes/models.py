@@ -3,8 +3,8 @@ import datetime
 from django.utils import timezone
 
 class Notes(models.Model):
-    note_title = models.CharField(max_length=100)
-    note_text = models.CharField(max_length=500)
+    title = models.CharField(max_length=100)
+    text = models.CharField(max_length=500)
     pub_date = models.DateTimeField('date published')
     author = models.CharField(max_length=100)
 
@@ -16,4 +16,4 @@ class Notes(models.Model):
 
 class Comments(models.Model):
     note = models.ForeignKey(Notes, on_delete=models.CASCADE)
-    comment_text = models.CharField(max_length=200)
+    text = models.CharField(max_length=200)
