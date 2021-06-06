@@ -1,4 +1,10 @@
 from django import forms
+from django.forms import ModelForm
+from .models import Comments
 
-class CommentForm(forms.Form):
-    comment = forms.CharField(label="Leave your comment or ask a question if you have!", widget=forms.Textarea(attrs={"rows":10, "cols":80}))
+class CommentsForm(ModelForm):
+    class Meta:
+        model = Comments
+        fields = ('text',)
+        labels = {'text':''}
+        widgets = {'text': forms.Textarea(attrs={"rows": 10, "cols":80, "placeholder": "Leave your comment or ask a question if you have!"})}

@@ -4,12 +4,12 @@ from django.utils import timezone
 
 class Notes(models.Model):
     title = models.CharField(max_length=100)
-    text = models.CharField(max_length=500)
+    quick_note = models.CharField(max_length=500)
     pub_date = models.DateTimeField('date published')
     author = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.note_text
+        return self.quick_note
 
     def was_published_recently(self):
         return self.pub_date >= timezone.now() - datetime.timedelta(deys=1)

@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.urls import reverse
 from .models import Notes, Comments
-from .forms import CommentForm
+from .forms import CommentsForm
 
 # Create your views here.
 def index(request):
@@ -12,17 +12,18 @@ def index(request):
 
 def note(request, id, message=''):
     note = get_object_or_404(Notes, pk=id)
-    form = CommentForm()
+    form = CommentsForm()
     return render(request, 'notes/note.html', {'note': note, 'message': message, 'form': form})
 
 def comments(request, id):
     note = get_object_or_404(Notes, pk=id)
     try:
         if request.method == 'POST':
-            form = CommentForm(request.POST)
+            form = CommentsForm(request.POST)
             if form.is_valid():
-                comment = Comments(text=form.cleaned_data['comment'], note_id=id)
-                comment.save()
+                new_form = form.save(commit=False)
+                new_form.note_id=id
+                new_form.save()
             return HttpResponseRedirect(reverse('notes:note', args=(id, "successful")))
     except:
         raise Http404("not exist")
