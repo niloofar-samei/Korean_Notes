@@ -15,5 +15,6 @@ class Note(models.Model):
         return self.pub_date >= timezone.now() - datetime.timedelta(deys=1)
 
 class Comment(models.Model):
-    note = models.ForeignKey(Note, on_delete=models.CASCADE)
     text = models.CharField(max_length=200)
+    note = models.ForeignKey(Note, on_delete=models.CASCADE)
+    pub_date = models.DateTimeField('date published')
