@@ -13,8 +13,9 @@ def index(request):
 
 def note(request, id, message=''):
     note = get_object_or_404(Note, pk=id)
+    comment = Comment.objects.filter(note_id=id)
     form = CommentForm()
-    return render(request, 'notes/note.html', {'note': note, 'message': message, 'form': form})
+    return render(request, 'notes/note.html', {'note': note, 'comment': comment, 'message': message, 'form': form})
 
 def comments(request, id):
     try:

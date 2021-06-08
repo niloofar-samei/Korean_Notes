@@ -18,5 +18,9 @@
       <input type="submit" value="Send">
     </form>
 
+    {% for each in comment %}
+      <p>{{ each.id }}--{{ each.text }}--{{ each.note }}--{{ each.note_id }}--{{ each.pub_date }}</p>
+    {% endfor %}
+
   </body>
 </html>
