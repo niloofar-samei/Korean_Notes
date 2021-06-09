@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html>
-  <head></head>
+  <head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href={% static 'notes/mystyles.css' %}>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
   <body>
-    <h1>{{ note.title }}</h1>
-    <p>{{ note.quick_note }}</p>
+    <h1 class="title">{{ note.title }}</h1>
+    <p class="subtitle">{{ note.quick_note }}</p>
     <i>{{ note.author }}</i><br>
     <i>{{ note.pub_date }}</i><br>
     <a href="/notes/">back</a>
