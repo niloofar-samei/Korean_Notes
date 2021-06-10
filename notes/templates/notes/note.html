@@ -1,77 +1,60 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href={% static 'notes/mystyles.css' %}>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-  </head>
-  <body>
-    <nav class="navbar n-navbar">
-      <div class="navbar-brand">
-        <a href="/notes/">HOME</a>
+{% extends "notes/base.html" %}
+
+{% block navbar %}
+
+  <nav class="navbar n-navbar">
+    <div class="navbar-brand">
+      <a href="/notes/">HOME</a>
+    </div>
+  </nav>
+
+{% endblock navbar %}
+{% block content %}
+
+  <h1 class="title">{{ note.title }}</h1>
+  <p>{{ note.quick_note }}</p>
+  <i>{{ note.author }}</i><br>
+  <i>{{ note.pub_date }}</i><br>
+
+  {% if message == "successful" %}
+    <div class="notification is-primary">
+      <button class="delete"></button>
+      <p><strong> I'll receive your comment. Thank you! </strong></p>
+    </div>
+  {% endif %}
+
+  <form action="{% url 'notes:comments' note.id %}" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Send" class="button is-primary">
+  </form>
+
+{% endblock content %}
+{% block comment %}
+
+  {% for each in comment %}
+    <div class="card">
+      <header class="card-header">
+        <p class="card-header-title">
+          {{ each.id }}
+        </p>
+      </header>
+      <div class="card-content">
+        <p>
+          {{ each.text }}
+        </p>
       </div>
-    </nav>
+      <footer class="card-footer">
+        <p class="card-footer-item">
+          <span>
+            {{ each.pub_date }}
+          </span>
+        </p>
+        <p class="card-footer-item">
+          <span></span>
+        </p>
+      </footer>
+    </div>
+  {% endfor %}
 
-    <section class="section">
-      <div class="container">
-
-        <h1 class="title">{{ note.title }}</h1>
-        <p>{{ note.quick_note }}</p>
-        <i>{{ note.author }}</i><br>
-        <i>{{ note.pub_date }}</i><br>
-
-        {% if message == "successful" %}
-          <div class="notification is-primary">
-            <button class="delete"></button>
-            <p><strong> I'll receive your comment. Thank you! </strong></p>
-          </div>
-        {% endif %}
-
-        <form action="{% url 'notes:comments' note.id %}" method="post">
-          {% csrf_token %}
-          {{ form }}
-          <input type="submit" value="Send" class="button is-primary">
-        </form>
-
-        {% for each in comment %}
-          <div class="card">
-            <header class="card-header">
-              <p class="card-header-title">
-                {{ each.id }}
-              </p>
-            </header>
-            <div class="card-content">
-              <p>
-                {{ each.text }}
-              </p>
-            </div>
-            <footer class="card-footer">
-              <p class="card-footer-item">
-                <span>
-                  {{ each.pub_date }}
-                </span>
-              </p>
-              <p class="card-footer-item">
-                <span></span>
-              </p>
-            </footer>
-          </div>
-        {% endfor %}
-
-      </div>
-    </section>
-
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
-          const $notification = $delete.parentNode;
-
-          $delete.addEventListener('click', () => {
-            $notification.parentNode.removeChild($notification);
-          });
-        });
-      });
-    </script>
-
-  </body>
-</html>
+{% endblock comment %}

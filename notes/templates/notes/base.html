@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% block head %}
+      {% load static %}
+      <link rel="stylesheet" type="text/css" href={% static 'notes/mystyles.css' %}>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% endblock head %}
+  </head>
+  <body>
+    {% block navbar %}{% endblock navbar %}
+    <section class="section">
+      <div class="container">
+        {% block content %}{% endblock content %}
+        {% block comment %}{% endblock comment %}
+        {% block footer %}
+          <script>
+            document.addEventListener('DOMContentLoaded', () => {
+              (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
+                const $notification = $delete.parentNode;
+
+                $delete.addEventListener('click', () => {
+                  $notification.parentNode.removeChild($notification);
+                });
+              });
+            });
+          </script>
+        {% endblock footer %}
+      </div>
+    </section>
+  </body>
+</html>
