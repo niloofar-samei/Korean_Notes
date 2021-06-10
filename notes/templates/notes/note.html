@@ -6,25 +6,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
-    <h1 class="title">{{ note.title }}</h1>
-    <p class="subtitle">{{ note.quick_note }}</p>
-    <i>{{ note.author }}</i><br>
-    <i>{{ note.pub_date }}</i><br>
-    <a href="/notes/">back</a>
+    <nav class="navbar n-navbar">
+      <div class="navbar-brand">
+        <a href="/notes/">HOME</a>
+      </div>
+    </nav>
 
-    {% if message == "successful" %}
-      <p><strong> I'll receive your comment. Thank you! </strong></p>
-    {% endif %}
+    <section class="section">
+      <div class="container">
 
-    <form action="{% url 'notes:comments' note.id %}" method="post">
-      {% csrf_token %}
-      {{ form }}
-      <input type="submit" value="Send">
-    </form>
+        <h1 class="title">{{ note.title }}</h1>
+        <p>{{ note.quick_note }}</p>
+        <i>{{ note.author }}</i><br>
+        <i>{{ note.pub_date }}</i><br>
 
-    {% for each in comment %}
-      <p>{{ each.id }}--{{ each.text }}--{{ each.note }}--{{ each.note_id }}--{{ each.pub_date }}</p>
-    {% endfor %}
+        {% if message == "successful" %}
+          <div class="notification is-primary">
+            <button class="delete"></button>
+            <p><strong> I'll receive your comment. Thank you! </strong></p>
+          </div>
+        {% endif %}
+
+        <form action="{% url 'notes:comments' note.id %}" method="post">
+          {% csrf_token %}
+          {{ form }}
+          <input type="submit" value="Send" class="button is-primary">
+        </form>
+
+        {% for each in comment %}
+          <div class="card">
+            <header class="card-header">
+              <p class="card-header-title">
+                {{ each.id }}
+              </p>
+            </header>
+            <div class="card-content">
+              <p>
+                {{ each.text }}
+              </p>
+            </div>
+            <footer class="card-footer">
+              <p class="card-footer-item">
+                <span>
+                  {{ each.pub_date }}
+                </span>
+              </p>
+              <p class="card-footer-item">
+                <span></span>
+              </p>
+            </footer>
+          </div>
+        {% endfor %}
+
+      </div>
+    </section>
 
   </body>
 </html>

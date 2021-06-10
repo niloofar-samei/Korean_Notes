@@ -12,13 +12,15 @@ $pink: #FA7C91;
 $brown: #757763;
 $beige-light: #D0D1CD;
 $beige-lighter: #EFF0EB;
-$piggy-pink: #fddde6;
+$piggy-pink: #FDDDE6;
+$dark-pink: #F77197;
+$dark-blue: #2F325B;
 
 // Update Bulma's global variables
 $family-sans-serif: "Nunito", sans-serif;
 $grey-dark: $brown;
 $grey-light: $beige-light;
-$primary: $purple;
+$primary: $dark-blue;
 $link: $pink;
 $widescreen-enabled: false;
 $fullhd-enabled: false;
@@ -28,14 +30,25 @@ $body-background-color: $piggy-pink;
 $control-border-width: 2px;
 $input-border-color: transparent;
 $input-shadow: none;
+$navbar-background-color: $dark-blue;
 
 // Import only what you need from Bulma
 @import "bulma/sass/utilities/_all.sass";
 @import "bulma/sass/base/_all.sass";
-@import "bulma/sass/elements/button.sass";
-@import "bulma/sass/elements/container.sass";
-@import "bulma/sass/elements/title.sass";
+//@import "bulma/sass/elements/button.sass";
+//@import "bulma/sass/elements/container.sass";
+//@import "bulma/sass/elements/title.sass";
+@import "bulma/sass/elements/_all.sass";
 @import "bulma/sass/form/_all.sass";
-@import "bulma/sass/components/navbar.sass";
+//@import "bulma/sass/components/navbar.sass";
+@import "bulma/sass/components/_all.sass";
 @import "bulma/sass/layout/hero.sass";
 @import "bulma/sass/layout/section.sass";
+
+a {
+  color: #ea6d70;
+}
+
+.card {
+  margin-top: 30px;
+}
