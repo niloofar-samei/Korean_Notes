@@ -4,11 +4,27 @@
     {% block head %}
       {% load static %}
       <link rel="stylesheet" type="text/css" href={% static 'notes/mystyles.css' %}>
+      <link href="../../static/notes/fontawesome/css/all.css" rel="stylesheet">
+      <link href="../../static/notes/fontawesome/css/fontawesome.css" rel="stylesheet">
+      <link href="../../static/notes/fontawesome/css/brands.css" rel="stylesheet">
+      <link href="../../static/notes/fontawesome/css/solid.css" rel="stylesheet">
       <meta name="viewport" content="width=device-width, initial-scale=1">
     {% endblock head %}
   </head>
   <body>
-    {% block navbar %}{% endblock navbar %}
+    {% block navbar %}
+      <nav class="navbar n-navbar">
+        <div class="navbar-brand">
+          <span class="icon-text">
+            <span class="icon">
+              <i class="fas fa-home"></i>
+            </span>
+            <span><a href="/notes/">HOME</a></span>
+          </span>
+        </div>
+      </nav>
+    {% endblock navbar %}
+
     <section class="section">
       <div class="container">
         {% block content %}{% endblock content %}

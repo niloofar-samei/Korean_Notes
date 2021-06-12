@@ -1,15 +1,20 @@
-</!DOCTYPE html>
-<html>
-  <head></head>
-  <body>
-    {% if latest_quick_notes %}
-      <ul>
+{% extends "notes/base.html" %}
+
+{% block content %}
+
+  {% if latest_quick_notes %}
+    <ul>
+      <article class="content">
         {% for note in latest_quick_notes %}
-          <li><a href="{% url 'notes:note' note.id %}">{{ note.title }}</a></li>
+          <h2 class="title"><a href="{% url 'notes:note' note.id %}">{{ note.title }}</a></h2>
+        <p>{{ note.quick_note }}</p>
+        <i>{{ note.pub_date }}</i>
+        <hr>
         {% endfor %}
-      </ul>
-    {% else %}
-      <p>No notes are available.</a>
-    {% endif %}
-  </body>
-</html>
+      </article>
+    </ul>
+  {% else %}
+    <p>No notes are available.</a>
+  {% endif %}
+
+{% endblock content %}
