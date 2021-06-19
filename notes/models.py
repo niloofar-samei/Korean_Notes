@@ -7,6 +7,7 @@ class Note(models.Model):
     quick_note = models.CharField(max_length=500)
     pub_date = models.DateTimeField('date published')
     author = models.CharField(max_length=100)
+    like = models.IntegerField(default=0)
 
     def __str__(self):
         return self.quick_note

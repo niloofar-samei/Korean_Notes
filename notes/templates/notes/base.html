@@ -8,6 +8,7 @@
       <link href="../../static/notes/fontawesome/css/fontawesome.css" rel="stylesheet">
       <link href="../../static/notes/fontawesome/css/brands.css" rel="stylesheet">
       <link href="../../static/notes/fontawesome/css/solid.css" rel="stylesheet">
+      <script src="../../static/notes/jquery.min.js"></script>
       <meta name="viewport" content="width=device-width, initial-scale=1">
     {% endblock head %}
   </head>
@@ -29,7 +30,10 @@
       <div class="container">
         {% block content %}{% endblock content %}
         {% block comment %}{% endblock comment %}
-        {% block footer %}
+        {% block footer %}{% endblock footer %}
+      </div>
+    </section>
+
           <script>
             document.addEventListener('DOMContentLoaded', () => {
               (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
@@ -40,9 +44,30 @@
                 });
               });
             });
+
+
+            $(document).ready(function() {
+                $('.fa-heart').click(function(e){
+                    this.style.color = this.style.color == 'red' ? 'white' : 'red';
+                    e.preventDefault();
+
+                        $.ajax({
+                            type:'POST',
+                            url: "{% url 'notes:post-like' %}",
+                                data:{
+                                id: "{{ note.id }}",
+                                color: document.getElementById("fa-heart").style.color,
+                                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                            },
+                            success: function(resp){
+                                $('#likes').text(resp);
+                            },
+                            error : function() {
+                                console.log("Error");
+                            }
+                        });
+                });
+            });
           </script>
-        {% endblock footer %}
-      </div>
-    </section>
   </body>
 </html>

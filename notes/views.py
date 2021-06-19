@@ -4,6 +4,7 @@ from django.urls import reverse
 from .models import Note, Comment
 from .forms import CommentForm
 from django.utils import timezone
+from django.http import JsonResponse
 
 # Create your views here.
 def index(request):
@@ -29,3 +30,21 @@ def comments(request, id):
             return HttpResponseRedirect(reverse('notes:note', args=(id, "successful")))
     except:
         raise Http404("not exist")
+
+def like(request):
+    if request.is_ajax() and request.method == 'POST':
+        print(request.POST['color'])
+        note = get_object_or_404(Note, id=request.POST['id'])
+        print(note.like)
+        if request.POST['color'] == 'red':
+            note.like += 1
+        else:
+            if note.like != 0:
+                note.like -= 1
+        print(note.like)
+        Note.objects.filter(id=1).update(like=note.like)
+        return HttpResponse(note.like)
+        #resp_data = {
+        #    'text': note.like,
+        #}
+        #return JsonResponse(resp_data, status=200)

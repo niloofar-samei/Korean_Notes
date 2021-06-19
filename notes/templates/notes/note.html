@@ -7,6 +7,8 @@
     <p>{{ note.quick_note }}</p>
     <i>{{ note.author }}</i><br>
     <i>{{ note.pub_date }}</i><br>
+    <i class="fas fa-heart" id="fa-heart"></i>
+    <b id="likes">{{ note.like }}</b>
   </article>
 
   {% if message == "successful" %}
