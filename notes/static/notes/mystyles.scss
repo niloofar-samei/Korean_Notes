@@ -26,11 +26,11 @@ $widescreen-enabled: false;
 $fullhd-enabled: false;
 
 // Update some of Bulma's component variables
-$body-background-color: $piggy-pink;
+//$body-background-color: #00bef7;
 $control-border-width: 2px;
 $input-border-color: transparent;
 $input-shadow: none;
-$navbar-background-color: $dark-blue;
+$navbar-background-color: transparent;
 
 // Import only what you need from Bulma
 @import "bulma/sass/utilities/_all.sass";
@@ -40,15 +40,48 @@ $navbar-background-color: $dark-blue;
 @import "bulma/sass/components/_all.sass";
 @import "bulma/sass/layout/_all.sass";
 
-a {
+body {
+  background: linear-gradient(90deg, rgba(15,15,23,1) 0%, rgba(47,50,91,1) 47%, rgba(0,190,247,1) 100%); 
+}
+
+// Navbar section.
+.navbar a, .navbar a:hover, .icon {
   color: #ea6d70;
 }
 
-.card {
-  margin-top: 30px;
+.icon-text, .navbar-start {
+  padding-top: 12px;
+  margin-left: 15px;
+}
+
+// Quicknote Section.
+.content {
+  background-color: $piggy-pink;
+  border: 5px solid white;
+  border-radius: 20px;
+  padding: 15px;
+}
+
+.subtitle {
+  font-size: 15px;
 }
 
 .fa-heart {
   color: white;
   text-shadow: 0px 0px 30px #f886a6;
+}
+
+// Comment form section.
+.comment-form {
+  margin-top: 15px;
+}
+
+.button {
+  border-radius: 8px;
+}
+
+// Comment section.
+.card {
+  border-radius: 20px;
+  margin-top: 30px;
 }

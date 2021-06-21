@@ -8,13 +8,13 @@
       <link href="../../static/notes/fontawesome/css/fontawesome.css" rel="stylesheet">
       <link href="../../static/notes/fontawesome/css/brands.css" rel="stylesheet">
       <link href="../../static/notes/fontawesome/css/solid.css" rel="stylesheet">
-      <script src="../../static/notes/jquery.min.js"></script>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <script src={% static 'notes/jquery.min.js' %}></script>
+      <meta name="viewport" content="width=device-width, ini:tial-scale=1">
     {% endblock head %}
   </head>
   <body>
     {% block navbar %}
-      <nav class="navbar n-navbar">
+      <nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
           <span class="icon-text">
             <span class="icon">
@@ -22,10 +22,20 @@
             </span>
             <span><a href="/notes/">HOME</a></span>
           </span>
+
+          <a role="button" class="navbar-burger" id="burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+        <div class="navbar-menu" id="nav-links">
+          <div class="navbar-start">
+            <a href="">ABOUT ME</a>
+          </div>
         </div>
       </nav>
     {% endblock navbar %}
-
     <section class="section">
       <div class="container">
         {% block content %}{% endblock content %}
@@ -34,40 +44,50 @@
       </div>
     </section>
 
-          <script>
-            document.addEventListener('DOMContentLoaded', () => {
-              (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
-                const $notification = $delete.parentNode;
+    <script>
 
-                $delete.addEventListener('click', () => {
-                  $notification.parentNode.removeChild($notification);
-                });
+      document.addEventListener('DOMContentLoaded', () => {
+          (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
+              const $notification = $delete.parentNode;
+
+              $delete.addEventListener('click', () => {
+                  $notification.parentNode.reynmoveChild($notification);
               });
-            });
+          });
+      });
 
 
-            $(document).ready(function() {
-                $('.fa-heart').click(function(e){
-                    this.style.color = this.style.color == 'red' ? 'white' : 'red';
-                    e.preventDefault();
+      $(document).ready(function() {
+          $('.fa-heart').click(function(e){
+              this.style.color = this.style.color == 'red' ? 'white' : 'red';
+              e.preventDefault();
 
-                        $.ajax({
-                            type:'POST',
-                            url: "{% url 'notes:post-like' %}",
-                                data:{
-                                id: "{{ note.id }}",
-                                color: document.getElementById("fa-heart").style.color,
-                                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
-                            },
-                            success: function(resp){
-                                $('#likes').text(resp);
-                            },
-                            error : function() {
-                                console.log("Error");
-                            }
-                        });
-                });
-            });
-          </script>
+              $.ajax({
+                  type:'POST',
+                  url: "{% url 'notes:post-like' %}",
+                  data:{
+                      id: "{{ note.id }}",
+                      color: document.getElementById("fa-heart").style.color,
+                      csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                  },
+                  success: function(resp){
+                      $('#likes').text(resp);
+                  },
+                  error : function() {
+                      console.log("Error");
+                  }
+              });
+          });
+      });
+
+      const burgerIcon = document.querySelector('#burger');
+      const navbarMenu = document.querySelector('#nav-links');
+
+      burgerIcon.addEventListener('click', () => {
+          navbarMenu.classList.toggle('is-active');
+      });
+
+    </script>
+
   </body>
 </html>

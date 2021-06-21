@@ -2,27 +2,38 @@
 
 {% block content %}
 
-  <article class="content">
-    <h1 class="title">{{ note.title }}</h1>
-    <p>{{ note.quick_note }}</p>
-    <i>{{ note.author }}</i><br>
-    <i>{{ note.pub_date }}</i><br>
-    <i class="fas fa-heart" id="fa-heart"></i>
-    <b id="likes">{{ note.like }}</b>
-  </article>
+  <section class="content">
+    <article>
+      <h1 class="title is-2">{{ note.title }}</h1>
+      <i class="subtitle">By: {{ note.author }} - {{ note.pub_date }}</i><hr>
+      <p>{{ note.quick_note }}</p><hr>
+      <i class="fas fa-heart" id="fa-heart"></i>
+      <b id="likes">{{ note.like }}</b>
+    </article>
 
-  {% if message == "successful" %}
-    <div class="notification is-primary">
-      <button class="delete"></button>
-      <p><strong> I'll receive your comment. Thank you! </strong></p>
+    {% if message == "successful" %}
+      <div class="notification is-primary">
+        <button class="delete"></button>
+        <p><strong> I'll receive your comment. Thank you! </strong></p>
+      </div>
+    {% endif %}
+
+    <div class="comment-form">
+      <form action="{% url 'notes:comments' note.id %}" method="post"">
+        {% csrf_token %}
+        <div class="field">
+          <div class="control">
+            {{ form }}
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            <input type="submit" value="Send" class="button is-primary">
+          </div>
+        </div>
+      </form>
     </div>
-  {% endif %}
-
-  <form action="{% url 'notes:comments' note.id %}" method="post">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Send" class="button is-primary">
-  </form>
+  </section>
 
 {% endblock content %}
 {% block comment %}
