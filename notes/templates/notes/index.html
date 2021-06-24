@@ -2,19 +2,19 @@
 
 {% block content %}
 
-  {% if latest_quick_notes %}
-    <ul>
-      <article class="content">
-        {% for note in latest_quick_notes %}
-          <h2 class="title"><a href="{% url 'notes:note' note.id %}">{{ note.title }}</a></h2>
-        <p>{{ note.quick_note }}</p>
-        <i>{{ note.pub_date }}</i>
-        <hr>
-        {% endfor %}
-      </article>
-    </ul>
-  {% else %}
-    <p>No notes are available.</a>
-  {% endif %}
+  <section class="section">
+    {% if latest_quick_notes %}
+      {% for note in latest_quick_notes %}
+        <div class="column is-full">
+          <article id="post-list">
+            <h2 class="title"><a href="{% url 'notes:note' note.id %}">{{ note.title }}</a></h2>
+            <i class="subtitle">- Note {{ note.id }} - {{ note.pub_date }}</i>
+          </article>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p>No notes are available.</a>
+    {% endif %}
+  </section>
 
 {% endblock content %}

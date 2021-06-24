@@ -2,6 +2,7 @@
 <html>
   <head>
     {% block head %}
+
       {% load static %}
       <link rel="stylesheet" type="text/css" href={% static 'notes/mystyles.css' %}>
       <link href="../../static/notes/fontawesome/css/all.css" rel="stylesheet">
@@ -10,19 +11,23 @@
       <link href="../../static/notes/fontawesome/css/solid.css" rel="stylesheet">
       <script src={% static 'notes/jquery.min.js' %}></script>
       <meta name="viewport" content="width=device-width, ini:tial-scale=1">
-    {% endblock head %}
+
+      {% endblock head %}
+
+      <style>
+
+
+
+      </style>
+
+
   </head>
   <body>
     {% block navbar %}
+
       <nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-          <span class="icon-text">
-            <span class="icon">
-              <i class="fas fa-home"></i>
-            </span>
-            <span><a href="/notes/">HOME</a></span>
-          </span>
-
+          <a href="/notes/" class="navbar-item underline">HOME</a>
           <a role="button" class="navbar-burger" id="burger" aria-label="menu" aria-expanded="false">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
@@ -31,21 +36,22 @@
         </div>
         <div class="navbar-menu" id="nav-links">
           <div class="navbar-start">
-            <a href="">ABOUT ME</a>
+            <a href="#" class="navbar-item underline">ABOUT ME</a>
+            <a href="#" class="navbar-item underline">MUSIC</a>
           </div>
         </div>
       </nav>
+
+
     {% endblock navbar %}
-    <section class="section">
-      <div class="container">
+
+    <section class="container section">
         {% block content %}{% endblock content %}
         {% block comment %}{% endblock comment %}
         {% block footer %}{% endblock footer %}
-      </div>
     </section>
 
     <script>
-
       document.addEventListener('DOMContentLoaded', () => {
           (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
               const $notification = $delete.parentNode;
@@ -80,6 +86,7 @@
           });
       });
 
+
       const burgerIcon = document.querySelector('#burger');
       const navbarMenu = document.querySelector('#nav-links');
 
@@ -87,6 +94,18 @@
           navbarMenu.classList.toggle('is-active');
       });
 
+
+      //JavaScript code for Slide functionality
+      var $slideLink = $("#slide-link"),
+          slideLinkText = $slideLink.find("span")[0];
+
+      $slideLink.on("mouseenter", linkOver);
+
+      function linkOver() {
+          TweenLite.to(slideLinkText, 0.3, {y: -25, ease: Cubic.easeIn, onComplete: function() {
+              TweenLite.fromTo(slideLinkText, 0.3, {y: 25}, {y: 0, ease: Cubic.easeOut})
+          }});
+      }
     </script>
 
   </body>
