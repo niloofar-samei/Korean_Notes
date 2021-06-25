@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'notes.apps.NotesConfig',
+    'blog.apps.BlogConfig',
     'django_sass_compiler',
     'django.contrib.admin',
     'django.contrib.auth',
