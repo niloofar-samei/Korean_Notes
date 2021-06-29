@@ -10,7 +10,7 @@ from django.http import JsonResponse
 def home(request):
     return render(request, 'blog/home.html')
 
-def index(request):
+def quicknote(request):
     latest_quick_notes = Note.objects.order_by('-pub_date')[:5]
     context = {'latest_quick_notes': latest_quick_notes}
     return render(request, 'blog/index.html', context)
