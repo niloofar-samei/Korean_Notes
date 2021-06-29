@@ -7,6 +7,9 @@ from django.utils import timezone
 from django.http import JsonResponse
 
 # Create your views here.
+def home(request):
+    return render(request, 'blog/home.html')
+
 def index(request):
     latest_quick_notes = Note.objects.order_by('-pub_date')[:5]
     context = {'latest_quick_notes': latest_quick_notes}

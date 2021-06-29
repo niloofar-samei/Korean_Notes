@@ -19,3 +19,4 @@ class Comment(models.Model):
     text = models.CharField(max_length=200)
     note = models.ForeignKey(Note, on_delete=models.CASCADE)
     pub_date = models.DateTimeField('date published')
+

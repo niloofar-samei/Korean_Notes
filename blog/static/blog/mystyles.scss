@@ -54,9 +54,14 @@ body {
   padding-top: 56px;
 }
 
-//hr {
-//  border: 1px solid $light-yellow;
-//}
+.korean {
+  font-family: korean;
+}
+
+@font-face {
+  font-family: korean;
+  src: url("font/GowunDodum-Regular.ttf") format('truetype');
+}
 
 p, .subtitle, h2 a, #likes{
   color: $almost-dark-black;
@@ -123,6 +128,94 @@ a.navbar-item:hover {
 }
 
 // Home page section.
+.intro {
+  font-size: 1.2rem;
+  color: white;
+}
+
+.korean-qoute {
+  font-size: 30px;
+  color: black;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.english-qoute {
+  font-size: 30px;
+  color: black;
+  text-align: center;
+  margin-top: 20px;
+  background: linear-gradient(to right, #FF0000 0%, #FFFF00 25%, #05C1FF 50%, #FFFF00 75%, #FF0000 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.qoute::before {
+  content: "“";
+}
+
+.qoute::after {
+  content: "”";
+}
+
+.welcome {
+  text-align: center;
+}
+
+.welcome-img {
+  position:absolute;
+  max-width:136px;
+  right:678px;
+  top:490px;
+//  -webkit-animation:moveupanddown 5.5s infinite;
+  animation:moveupanddown-welcome 5.5s infinite;
+  animation-delay:.5s;
+  opacity:1;
+}
+
+@keyframes moveupanddown-welcome {
+  0% {
+  transform: rotate(-20deg) translateY(0px);
+  opacity:1
+ }
+  50% {
+  transform: rotate(-20deg) translateY(-20px);
+  opacity:1
+ }
+  100% {
+  transform: rotate(-20deg) translateY(0px);
+  opacity:1;
+ }
+}
+
+.hello-img {
+  position:absolute;
+  max-width:136px;
+  right:195px;
+  top:490px;
+//  -webkit-animation:moveupanddown 5.5s infinite;
+  animation:moveupanddown-hello 5.5s infinite;
+  animation-delay:.5s;
+  opacity:1;
+}
+
+@keyframes moveupanddown-hello {
+  0% {
+  transform: rotate(20deg) translateY(0px);
+  opacity:1
+ }
+  50% {
+  transform: rotate(20deg) translateY(-20px);
+  opacity:1
+ }
+  100% {
+  transform: rotate(20deg) translateY(0px);
+  opacity:1;
+ }
+}
+
+// Index page section.
 #post-list {
   background-color: $new-pink;
   //border: 2px solid white;
