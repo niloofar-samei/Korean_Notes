@@ -14,15 +14,8 @@
 
       {% endblock head %}
 
-      <style>
-
-
-
-      </style>
-
-
   </head>
-  <body>
+  <body style="background-color: #f29fd5;">
     {% block navbar %}
 
       <nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
@@ -36,20 +29,21 @@
         </div>
         <div class="navbar-menu" id="nav-links">
           <div class="navbar-start">
+            <a href="#" class="navbar-item underline">QUICK NOTES</a>
             <a href="#" class="navbar-item underline">ABOUT ME</a>
             <a href="#" class="navbar-item underline">MUSIC</a>
           </div>
         </div>
       </nav>
 
-
     {% endblock navbar %}
 
     <section class="container section">
         {% block content %}{% endblock content %}
         {% block comment %}{% endblock comment %}
-        {% block footer %}{% endblock footer %}
     </section>
+
+    {% block footer %}{% endblock footer %}
 
     <script>
       document.addEventListener('DOMContentLoaded', () => {

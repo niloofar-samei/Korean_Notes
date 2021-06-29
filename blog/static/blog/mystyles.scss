@@ -17,6 +17,10 @@ $dark-pink: #F77197;
 $dark-blue: #2F325B;
 $light-yellow: #f7f6cf;
 $almost-dark-black: #333333;
+$green-blue: #6cc3cb;
+$green: #6be3cb;
+$new-pink: #f29fd5;
+$ligter-pink: #fdcaeb;
 
 // Update Bulma's global variables
 $family-sans-serif: "Nunito", sans-serif;
@@ -28,7 +32,7 @@ $widescreen-enabled: false;
 $fullhd-enabled: false;
 
 // Update some of Bulma's component variables
-$body-background-color: $piggy-pink;
+$body-background-color: transparent;
 $control-border-width: 2px;
 $input-border-color: transparent;
 $input-shadow: none;
@@ -45,27 +49,36 @@ $navbar-background-color: transparent;
 @import "bulma/sass/helpers/_all.sass";
 
 //all
-//body {
-//  background: linear-gradient(90deg, rgba(15,15,23,1) 0%, rgba(47,50,91,1) 47%, rgba(0,190,247,1) 100%);
-//}
-
-hr {
-  border: 1px solid $light-yellow;
+body {
+  margin: 0;
+  padding-top: 56px;
 }
 
+//hr {
+//  border: 1px solid $light-yellow;
+//}
+
 p, .subtitle, h2 a, #likes{
-	color: $almost-dark-black;
+  color: $almost-dark-black;
 }
 
 // Navbar section.
+.navbar {
+  background-color: $new-pink;
+  //border-bottom: 1px solid
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
 .navbar-start {
   flex-grow: 1;
   justify-content: center;
-	text-align: center;
+  text-align: center;
 }
 
 a.navbar-item:hover {
-	background-color: transparent;
+  background-color: transparent;
 }
 
 .navbar a:hover {
@@ -73,7 +86,7 @@ a.navbar-item:hover {
 }
 
 .navbar a, .title {
-  color: #6cc3cb;
+  color: black;
 }
 
 .navbar-start, .navbar-brand {
@@ -111,20 +124,22 @@ a.navbar-item:hover {
 
 // Home page section.
 #post-list {
-  background-color: $piggy-pink;
-	border: 2px solid white;
+  background-color: $new-pink;
+  //border: 2px solid white;
   padding: 15px;
-	border-radius: 5px;
+  border-radius: 5px;
 }
 
 #post-list:hover {
-	//transform: scale(1.1);
-	background-color: #6cc3cb;
+  //transform: scale(1.1);
+  background-color: #fdcaeb;
 }
 
 // Quicknote Section.
 #post {
-  background-color: $piggy-pink;
+  background-color: $green-blue;
+  border: 2px solid white;
+  border-radius: 10px;
   padding: 15px;
 }
 
@@ -133,7 +148,7 @@ a.navbar-item:hover {
 }
 
 #note-hr-bottom {
-  margin-bottom: 5px;
+  margin-bottom: 5px;  //check this before commit.
 }
 
 .subtitle {
@@ -152,8 +167,8 @@ a.navbar-item:hover {
 
 .button, .button:hover {
   border-radius: 8px;
-  background-color: #6cc3cb;
-  border: 1px solid #6cc3cb;
+  background-color: $green-blue;
+  border: 1px solid white;
 }
 
 // Comments section.
