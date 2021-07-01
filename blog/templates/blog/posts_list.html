@@ -3,8 +3,8 @@
 {% block content %}
 
   <section class="section">
-    {% if latest_quick_notes %}
-      {% for note in latest_quick_notes %}
+    {% if posts_list %}
+      {% for note in posts_list %}
         <div class="column is-full">
           <article id="post-list">
             <h2 class="title"><a href="{% url 'blog:note' note.id %}">{{ note.title }}</a></h2>

@@ -10,29 +10,23 @@ from django.http import JsonResponse
 def home(request):
     return render(request, 'blog/home.html')
 
-def quicknote(request):
-    latest_quick_notes = Note.objects.order_by('-pub_date')[:5]
-    context = {'latest_quick_notes': latest_quick_notes}
-    return render(request, 'blog/index.html', context)
+def posts_list(request):
+    posts_list = Note.objects.order_by('-pub_date')[:5]
+    context = {'posts_list': posts_list}
+    return render(request, 'blog/posts_list.html', context)
 
-def note(request, id, message=''):
+def note(request, id):
     note = get_object_or_404(Note, pk=id)
     comment = Comment.objects.filter(note_id=id)
     form = CommentForm()
-    return render(request, 'blog/note.html', {'note': note, 'comment': comment, 'message': message, 'form': form})
+    return render(request, 'blog/note.html', {'note': note, 'comment': comment, 'form': form})
 
-def comments(request, id):
-    try:
-        if request.method == 'POST':
-            form = CommentForm(request.POST)
-            if form.is_valid():
-                new_form = form.save(commit=False)
-                new_form.note_id = id
-                new_form.pub_date = timezone.now()
-                new_form.save()
-            return HttpResponseRedirect(reverse('blog:note', args=(id, "successful")))
-    except:
-        raise Http404("not exist")
+def comments(request):
+    if request.is_ajax() and request.method == 'POST':
+        comment = Comment(text=request.POST['comment'], note_id=request.POST['id'], pub_date=timezone.now())
+        comment.save()
+    return HttpResponse('fine')
+
 
 def like(request):
     if request.is_ajax() and request.method == 'POST':
@@ -47,7 +41,3 @@ def like(request):
         print(note.like)
         Note.objects.filter(id=1).update(like=note.like)
         return HttpResponse(note.like)
-        #resp_data = {
-        #    'text': note.like,
-        #}
-        #return JsonResponse(resp_data, status=200)

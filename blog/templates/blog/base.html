@@ -5,14 +5,14 @@
 
       {% load static %}
       <link rel="stylesheet" type="text/css" href={% static 'blog/mystyles.css' %}>
-      <link href="../../static/blog/fontawesome/css/all.css" rel="stylesheet">
-      <link href="../../static/blog/fontawesome/css/fontawesome.css" rel="stylesheet">
-      <link href="../../static/blog/fontawesome/css/brands.css" rel="stylesheet">
-      <link href="../../static/blog/fontawesome/css/solid.css" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href={% static 'blog/fontawesome/css/all.css' %}>
+      <link rel="stylesheet" type="text/css" href={% static 'blog/fontawesome/css/fontawesome.css' %}>
+      <link rel="stylesheet" type="text/css" href={% static 'blog/fontawesome/css/brands.css' %}>
+      <link rel="stylesheet" type="text/css" href={% static 'blog/fontawesome/css/solid.css' %}>
       <script src={% static 'blog/jquery.min.js' %}></script>
       <meta name="viewport" content="width=device-width, ini:tial-scale=1">
 
-      {% endblock head %}
+    {% endblock head %}
 
   </head>
   <body style="background-color: #f29fd5;">
@@ -51,7 +51,7 @@
               const $notification = $delete.parentNode;
 
               $delete.addEventListener('click', () => {
-                  $notification.parentNode.reynmoveChild($notification);
+                  $notification.parentNode.removeChild($notification);
               });
           });
       });
@@ -64,7 +64,7 @@
 
               $.ajax({
                   type:'POST',
-                  url: "{% url 'blog:post-like' %}",
+                  url: "{% url 'blog:like' %}",
                   data:{
                       id: "{{ note.id }}",
                       color: document.getElementById("fa-heart").style.color,
@@ -89,17 +89,27 @@
       });
 
 
-      //JavaScript code for Slide functionality
-      var $slideLink = $("#slide-link"),
-          slideLinkText = $slideLink.find("span")[0];
+      $(document).ready(function() {
+          $('.button').click(function(e){
+              e.preventDefault();
 
-      $slideLink.on("mouseenter", linkOver);
-
-      function linkOver() {
-          TweenLite.to(slideLinkText, 0.3, {y: -25, ease: Cubic.easeIn, onComplete: function() {
-              TweenLite.fromTo(slideLinkText, 0.3, {y: 25}, {y: 0, ease: Cubic.easeOut})
-          }});
-      }
+              $.ajax({
+                  type:'POST',
+                  url: "{% url 'blog:comments' %}",
+                  data:{
+                      id: "{{ note.id }}",
+                      comment: document.getElementById("comment-textarea").value,
+                      csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                  },
+                  success: function(resp){
+                      document.getElementById("good").style.display = "block";
+                  },
+                  error: function(resp) {
+                      document.getElementById("bad").style.display = "block";
+                  }
+              });
+          });
+      });
     </script>
 
   </body>

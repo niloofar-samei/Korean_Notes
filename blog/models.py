@@ -4,7 +4,7 @@ from django.utils import timezone
 
 class Note(models.Model):
     title = models.CharField(max_length=100)
-    quick_note = models.CharField(max_length=500)
+    quick_note = models.TextField()
     pub_date = models.DateTimeField('date published')
     author = models.CharField(max_length=100)
     like = models.IntegerField(default=0)
@@ -19,4 +19,3 @@ class Comment(models.Model):
     text = models.CharField(max_length=200)
     note = models.ForeignKey(Note, on_delete=models.CASCADE)
     pub_date = models.DateTimeField('date published')
-

@@ -15,16 +15,20 @@
       </article>
   </div>
 
-    {% if message == "successful" %}
-      <div class="notification is-primary">
+
+      <div class="notification" id="good" style="display:none">
         <button class="delete"></button>
         <p><strong> I'll receive your comment. Thank you! </strong></p>
       </div>
-    {% endif %}
+
+      <div class="notification" id="bad" style="display:none">
+        <button class="delete"></button>
+        <p><strong> Oops! We couldn't submit your comment. Please try again later. </strong></p>
+      </div>
 
     <div class="column is-full">
       <div class="comment-form">
-        <form action="{% url 'blog:comments' note.id %}" method="post"">
+        <form action="{% url 'blog:comments'%}" method="post"">
           {% csrf_token %}
           <div class="field">
             <div class="control">
