@@ -17,7 +17,7 @@ def posts_list(request):
 
 def note(request, id):
     note = get_object_or_404(Note, pk=id)
-    comment = Comment.objects.filter(note_id=id)
+    comment = Comment.objects.filter(note_id=id).order_by('-id')
     form = CommentForm()
     return render(request, 'blog/note.html', {'note': note, 'comment': comment, 'form': form})
 
